@@ -1,0 +1,282 @@
+.\"
+.\" Last Modified: 06/16/86
+.\"
+.TH UROGUE 6 "1.03 Draft"
+.SH NAME
+urogue \- UltraRogue \- Exploring the dungeons of doom.
+.SH SYNTAX
+.B urogue
+[
+.I save-file
+]
+[
+.B \-k
+]
+[
+.B \-s
+]
+[
+.B \-n
+]
+[
+.B \-v
+]
+[
+.B \-r
+]
+.SH DESCRIPTION
+.PP
+.I UltraRogue
+is a advanced version of one of the more standard rogue games.
+It is much more difficult and interesting to play than the
+original version on which it is based (Advanced Rogue 2.0).
+Some of it's unique features include 10 player character classes,
+several hundred monsters, charmable monsters, etc.
+.PP
+To win the game
+you must locate 8 artifacts which start appearing from level 25
+down.  You must then bring all artifacts back up out of the dungeon.
+These artifacts also may be 
+.I applied
+to use some of their great powers!  Be warned, though, sometimes these
+powers back-fire on you.
+.SH ENVIRONMENT
+The environment variable 
+.B $UROGUE
+(the person installing 
+.I UltraRogue
+may have changed this for your site)
+is checked to set certain default options for 
+.I UltraRogue.
+The following may be set in the 
+.B $UROGUE:
+.IP "\fBterse\fR (\fIboolean\fR)"
+Short output messages.
+.IP "\fBflush\fR (\fIboolean\fR)"
+Flush typeahead when fighting.
+.IP "\fBjump\fR (\fIboolean\fR)"
+Show position only at the end of running.
+.IP "\fBinven\fR (\fIstring\fR)"
+Inventory style.
+.IP "\fBaskme\fR (\fIboolean\fR)"
+Ask about unidentified things.
+.IP "\fBstopdoor\fR (\fIboolean\fR)"
+Stop running when next to something interesting.
+.IP "\fBname\fR (\fIstring\fR)"
+The rogue's name.
+.IP "\fBfruit\fR (\fIstring\fR)"
+The funny fruit used by the rogue.
+.IP "\fBfile\fR (\fIstring\fR)"
+Default savefile name.
+.IP "\fBscore\fR (\fIstring\fR)"
+Default scorefile name.
+.IP "\fBclass\fR (\fIstring\fR)"
+Default player class.
+.sp
+.PP
+Something like
+.nf
+.sp
+.in +.5in
+setenv UROGUE "name=VAX Killer,fruit=Peach,noterse,jump"
+.in -.5in
+.sp
+.fi
+does the obvious.  The ``score'' option is ignored unless you start
+urogue in wizard mode.	The class option string can have the following
+values: ``fighter'', ``illus'', ``paladin'', ``ranger'', ``cleric'', ``magic'',
+``assasin'', ``druid'', ``ninja'', and ``thief'' and is initialized only at
+startup time.  The ``inven'' option can take the values ``slow'', ``clear'',
+and ``overwrite''.
+.PP
+You may change most of these values while playing with the 
+.B ``o''
+command.
+.SH OPTIONS
+.PP
+If a
+.I save_file
+is specified,
+urogue will be restored from the specified saved game file.
+If the save file is named ``-r'', the default saved game file of
+.I ~/rogue.save
+is restored.
+The other options are:
+.IP \-k
+Place the terminal's kaypad into 
+.I auxilary
+or
+.I applications
+mode.  Once this is done, the keypad may be used for movement instead
+of the normal letter movement keys.  
+The directions are ``1'' move left and down, ``2'' move down, ``3'' move 
+right and down, ``6'' move right, ``9'' move right and up, ``8'' move up,
+``7'' move up, and ``4'' move left.  If the user hits the <RUN> key
+(key ``5'') and then a direction, then the rogue will run in the specified
+direction.
+When the game ends the keypad is restored
+to normal
+.I numeric
+mode if \-k was specified.  The user may also place the keypad into 
+.I auxilary
+or
+.I applications
+mode manually and then may use the keypad without specifing the
+\-k option.
+.IP \-s
+Display the list of scores.
+.IP \-n
+Display the urogue news file.  
+This is a file containing information on currently known bugs,
+changes, fixes, and enhancements to look for from the last version.
+.IP \-v
+Display the urogue version information.
+.SH COMMANDS
+The following is a list of commands for 
+.I UltraRogue.
+You may see a similiar list during a 
+.I UltraRogue
+game by using the 
+.B ``?'' 
+command.
+A 
+.I <direction>
+is one of 
+\fB``h'', ``j'', ``k'', ``l'', ``y'', ``u'', ``b'', \fRor\fB 
+``n''.\fR
+.IP \fB?\fR
+Print out a list of commands.
+.IP \fB/\fR
+Identify objects.
+.IP \fBh\fR
+Move left.
+.IP \fBj\fR
+Move down.
+.IP \fBk\fR
+Move up.
+.IP \fBl\fR
+Move right.
+.IP \fBy\fR
+Move up and left.
+.IP \fBu\fR
+Move up and right.
+.IP \fBb\fR
+Move down and left.
+.IP \fBn\fR
+Move down and right.
+.IP \fB<SHIFT><direction>\fR
+Run in 
+.I <direction>.
+.IP \fBm<direction>\fR
+Move in 
+.I <direction>
+without picking anything up.
+.IP \fBt<direction>\fR
+Throw something in 
+.I <direction>.
+.IP \fBz<direction>\fR
+Zap a wand or staff in 
+.I <direction>.
+.IP \fB>\fR
+Go down a staircase.
+.IP \fB<\fR
+Go up a staircase.
+You must possess at least one Artifact to go up a staircase.
+.IP \fBs\fR
+Search for a trap/secrect door.
+.IP \fB.\fR
+Rest (do nothing) for one turn.
+.IP \fBi\fR
+General inventory.
+.IP \fBI\fR
+Inventory a single item.
+.IP \fBq\fR
+Quaff a potion.
+.IP \fBr\fR
+Read paper.
+.IP \fBe\fR
+Eat one ration of food.
+.IP \fBw\fR
+Wield a weapon.
+.IP \fBW\fR
+Wear armor.
+.IP \fBT\fR
+Take armor off.
+.IP \fBP\fR
+Put on a ring.
+.IP \fBR\fR
+Remove a ring.
+.IP \fBA\fR
+Apply an Artifact.
+.IP \fBd\fR
+Drop an object.
+.IP \fBc\fR
+Call object (generic).
+.IP \fBM\fR
+Mark object (specific).
+.IP \fBo\fR
+Examine/set options.
+.IP \fBC\fR
+Cast a spell/say a prayer.
+.IP \fBp\fR
+Pray to a deity.
+.IP \fBa\fR
+Affect the undead.
+.IP \fB^\fR
+Set a trap.
+.IP \fBD\fR
+Dip something in a pool.
+.IP \fB^T\fR
+Take (steal) from 
+.I <direction>.
+.IP \fB^R\fR
+Redraw screen.
+.IP \fB^P\fR
+Print last message.
+May go up to the last 10 messages.
+.IP \fB<ESCAPE>\fR
+Cancel current command.
+.IP \fBv\fR
+Print 
+.I UltraRogue
+version information.
+.IP \fB!\fR
+Create a shell.  Uses $SHELL if present in your environment.
+.IP \fBS\fR
+Save the current game.
+.IP \fBQ\fR
+Quit the current game.
+.IP \fB=\fR
+Listen for monsters.
+.IP \fBf<direction>\fR
+Fight monster in 
+.I <direction>.
+.IP \fBF<direction>\fR
+Fight monster to death in 
+.I <direction>.
+.IP \fB#\fR
+Buy the object the rogue is standing on.
+Used when in Friendly Fiend's Flea Market.
+.IP \fB$\fR
+Price the object the rogue is standing on.
+Used when in Friendly Fiend's Flea Market.
+.IP \fB%\fR
+Sell an object from the rogue's pack.
+Used when in Friendly Fiend's Flea Market.
+.SH FILES
+.DT
+.ta \w'/usr/games/lib/urogue/scorefile\ \ \ 'u
+/usr/games/lib/urogue/scorefile	\- Score file
+.br
+.ta \w'/usr/games/lib/urogue/motd\ \ \ 'u
+/usr/games/lib/urogue/motd	\- Message of the day
+.br
+.ta \w'/usr/games/lib/urogue/news\ \ \ 'u
+/usr/games/lib/urogue/news	\- News file
+.br
+\fB~\fP/rogue.save	\- Default save file
+.ST
+.SH SEE ALSO
+rogue(6),
+.br
+.I "A Guide to the Dungeons of Doom."

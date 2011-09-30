@@ -1,0 +1,147 @@
+Last Modified: 06/30/86
+
+Congratulations!  You are now reading the installation information file
+for UltraRogue Release 1.  I would appreciate it if you dropped me a
+line saying who you got this from and what version you have (including
+date).	Please don't tell the players of the game where you got this
+from as I don't want to be beseiged by requests for things.  I would
+appreciate forwarding bug reports so that we can fix them.  You may
+distribute the binary version at your discretion.  This includes the
+neccesary makefiles and source files to customize urogue.
+
+Note carefully that Alpha versions are considered test versions with
+probably tons of bugs and incomplete implementations of things.  Beta
+versions are more reliable, but probably still contain major bugs.
+Gamma and so on are later test versions with minor bugs (i hope).
+Versions without an Alpha, Beta or later designation are considered
+"production" and bugs reported may not be fixed until the next official
+version is announced.
+
+Modify the initialization constants in tunable.c before you run make.
+Note that HOLIDAY is really a boolean and is currently set to allow
+playing at any time provided load is low.  Setting HOLIDAY to 1 will
+prevent playing between 9 and 5 during weekdays no matter what the load
+is.  Uptime(1) is the default for the command that prints load
+averages.  (System V unix variants can ignore load average handling as
+it is not implemented.	Only the maximum number of users of the load
+variables are used to restrict playing.) You may need to modify
+LOADAV_SCAN to be a correct string for scanf to parse your load average
+information correctly.	WARNTIME is used on BSD systems to specify the
+time interval in seconds between warning messages to save the game (or
+quit) before the game is terminated forcefully.  It is ignored on
+System 5 systems.  SAVETIME specifies how long in seconds between the
+time the save file is created and the save file is closed to allow
+before it is considered to be "touched" and not restartable.
+Everything else there should be self explanatory.  Urogue itself can
+have an owner of anything as long as it's owner can write into the
+score file and read the PASSCTL, NEWS, and PERMOK files used for
+control.  If you have an older version of urogue, srogue, or arogue,
+the .rog_defs and .rogue_save files are incompatible.  The external
+variable ROGDEFS in tunable.c is used to provide a facility for keeping
+multiple versions of urogue around that either have different formats
+or different contents.	OPTIONS should be modified to be the correct
+name of the environment variable that the user sets their options at
+startup.  By default it is UROGUE.  PAGER is the program to use when
+printing out the MOTD, NEWS and PERMOK files.  ROGUE_SAVE is used to
+specify the default name of the save file.
+
+Review the Makefile to verify that the specified uid's and other
+such things exist or need modification for your environment.
+
+After running make, run "control -i" (for initialize).	This will set
+up the list of people allowed to bypass load control and also allows
+you to specify the wizard's password.  The files PASSCTL, PERMOK, and
+SCOREDIR are created or recreated as neccesary.  The NEWS and MOTD
+files will be created if they do not exist, but they will be empty.  If
+they already exist, they will not be touched.  When running "control"
+with the -i flag and SCOREDIR already exists, it will prompt for a
+reset of SCOREDIR.  Replying with a 'y' will empty SCOREDIR.  To
+initialize the SCOREDIR so that there is something in it, play a game
+in regular (nonwizard) mode and kill at least one monster before
+quitting.  When the SCOREDIR is empty, urogue will fill it.  The other
+flags for "control" are:  c, check list of authorized users; a,
+authorize another user; p, change wizard's password; d, remove
+authorization for a user; and s, reset the scorefile.  The seed for the
+password is 2 characters.
+
+The NEWS file is to be filled in with things of lasting importance such
+as a log of changes to urogue.	The MOTD file is for important
+announcements that are short and fit on one screen that you want people
+to see often.
+
+If the NOPLAY file exists, urogue will print the contents of the file
+and exit, even if the player is the wizard.  It is intended for
+disabling urogue when you are doing system testing and such when a
+person otherwise is able to play urogue.
+
+For testing the game, the environment variable SEED can be set to
+contain an integer seed.  This seed is used only if you start up urogue
+with the wizard's password prompt by urogue "".
+
+Restoring a saved game is done by "urogue -r" for the default save file
+of ~/rogue.save.  Any other name is restored by "urogue saved-file".
+
+There are 8 different treasures to be picked up in this version of rogue.
+The first is on level 25 and is relatively easy to pick up.  The last is
+on level 100 and is very difficult to get.  Carrying any one of the
+unique treasures allows the rogue to go up the stairs, but one has to
+be very careful.  To be a total winner, yu must pick up all 8 and
+return to the surface again.
+
+The environment variable UROGUE is used to set up the default things
+for a player.  The options that can be set are:
+
+terse:		short output messages
+flush:		flush typeahead when fighting
+jump:		show position only at the end of running
+inven:		inventory style
+askme:		ask about unidentified things
+stopdoor:	stop running when next to something interesting
+name:		the rogue's name (string)
+fruit:		the funny fruit used by the rogue (string)
+file:		default savefile name (string)
+score:		default scorefile name (string)
+class:		default player class (string)
+
+Something like
+
+setenv UROGUE "name=George of the Jungle,fruit=peach,noterse,jump"
+
+does the obvious.  The "score" option is ignored unless you start
+urogue in wizard mode.	The class option string can have the following
+values: "fighter", "illus", "paladin", "ranger", "cleric", "magic",
+"assasin", "druid", "ninja", and "thief" and is initialized only at
+startup time.  The "inven" option can take the values "slow", "clear",
+and "overwrite".
+
+Here is my current address.  If this doesn't work, contact the person
+who gave you this version.
+
+ A condensed pedigree of rogue:
+
+	This must have all been said before, but I was just peeking in on
+this newsgroup and somebody asked so here is what I know:
+
+Rogue was originally written and designed by Glenn Wichman and Michael Toy
+at UC Santa Cruz.  Michael Toy wrote the game and took it with him when he
+went to Berkeley where Ken Arnold jumped in and blessed Rogue with his
+additions and improvements until it reached a point where the source code
+no longer resembled the humble little hack that Michael Toy brought to Berkeley.
+Somewhere along the line, an early version of the source to rogue got sent
+out on the net.  I don't know for sure, but I suspect that Super Rogue
+and Advanced Rogue and whatever other ultra-rogues exist are all based
+on that code.
+
+The "official" version of rogue, at least in the eyes of the authors is
+5.3 -- 5.3 is maintained and guarded by Ken Arnold with the full knowledge
+and blessing of Glenn Wichman and Michael Toy.
+
+Spun off form 5.2 and incorporating many 5.3 features and a few twists of
+its own (but still your average rogue game) is IBM PC rogue.  Which is for
+sale, as has already been pointed out on the net.  IBM PC Rogue exists due
+to the efforts of Jon Lane and Michael Toy.
+
+That's the scoop as I see it,
+
+(using a friends account)
+Michael Toy
